@@ -8,6 +8,15 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-B6TZMZX6C6"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-B6TZMZX6C6');
+    </script>
     <style>
         body {
             font-family: 'Poppins', sans-serif;
@@ -98,12 +107,12 @@
         document.addEventListener('DOMContentLoaded', () => {
             // --- Configuration & State ---
             const spotsData = [
-                { id: 'solo-pods', name: 'Solo Pods', description: 'For focused, individual study sessions.', likes: 0, position: 0, wins: 0, color: 'bg-red-500', icon: '🚗', background: 'https://d329ms1y997xa5.cloudfront.net/accounts/206453/images/solo_pods__2_.jpg' },
+                { id: 'solo-pods', name: 'Solo Pods', description: 'Best spot for focused, individual study sessions.', likes: 0, position: 0, wins: 0, color: 'bg-red-500', icon: '🚗', background: 'https://d329ms1y997xa5.cloudfront.net/accounts/206453/images/solo_pods__2_.jpg' },
                 { id: 'seminar-rooms', name: 'Seminar Rooms', description: 'Perfect for group projects and discussions.', likes: 0, position: 0, wins: 0, color: 'bg-blue-500', icon: '🏎️', background: 'https://d329ms1y997xa5.cloudfront.net/accounts/206453/images/seminar_room.jpg' },
-                { id: 'av-rooms', name: 'AV Rooms', description: 'Experience media with top-notch equipment.', likes: 0, position: 0, wins: 0, color: 'bg-green-500', icon: '🚁', background: 'https://d329ms1y997xa5.cloudfront.net/accounts/206453/images/AV_room.jpg' },
-                { id: 'main-stack', name: 'Main Stack', description: 'Get lost in the endless aisles of books.', likes: 0, position: 0, wins: 0, color: 'bg-yellow-500', icon: '🚓', background: 'https://d329ms1y997xa5.cloudfront.net/accounts/206453/images/Main_stack.jpg' },
-                { id: 'learning-commons', name: 'Learning Commons', description: 'A vibrant, collaborative open space.', likes: 0, position: 0, wins: 0, color: 'bg-purple-500', icon: '🏍️', background: 'https://d329ms1y997xa5.cloudfront.net/accounts/206453/images/Learning_commons.jpg' },
-                { id: 'resources-rooms', name: 'Learning Resources', description: 'Access special collections and materials.', likes: 0, position: 0, wins: 0, color: 'bg-pink-500', icon: '🚙', background: 'https://d329ms1y997xa5.cloudfront.net/accounts/206453/images/IMG_3028.jpg' }
+                { id: 'av-rooms', name: 'AV Rooms', description: 'Surround yourself with diverse multimedia resources.', likes: 0, position: 0, wins: 0, color: 'bg-green-500', icon: '🚁', background: 'https://d329ms1y997xa5.cloudfront.net/accounts/206453/images/AV_room.jpg' },
+                { id: 'main-stack', name: 'Main Stack', description: 'Immerse yourself in the endless aisles of books.', likes: 0, position: 0, wins: 0, color: 'bg-yellow-500', icon: '🚓', background: 'https://d329ms1y997xa5.cloudfront.net/accounts/206453/images/Main_stack.jpg' },
+                { id: 'learning-commons', name: 'Learning Commons', description: 'A bright, open space that insipres collaboration and creativity.', likes: 0, position: 0, wins: 0, color: 'bg-purple-500', icon: '🏍️', background: 'https://d329ms1y997xa5.cloudfront.net/accounts/206453/images/Learning_commons.jpg' },
+                { id: 'resources-rooms', name: 'Learning Resources', description: 'Dive into an environment equipped with high-end technology.', likes: 0, position: 0, wins: 0, color: 'bg-pink-500', icon: '🚙', background: 'https://d329ms1y997xa5.cloudfront.net/accounts/206453/images/IMG_3028.jpg' }
             ];
 
             let gameInterval = null;
@@ -211,6 +220,12 @@
                 if (spot) {
                     spot.likes++;
                     document.getElementById(`likes-${spot.id}`).textContent = spot.likes;
+                    
+                    // Send a 'like' event to Google Analytics
+                    gtag('event', 'like', {
+                        'card_id': spot.id,
+                        'card_name': spot.name
+                    });
                 }
             }
             
@@ -254,6 +269,12 @@
 
                 winnerText.textContent = winner.name;
                 winnerBanner.classList.add('show');
+                
+                // Send a 'win' event to Google Analytics
+                gtag('event', 'win', {
+                    'card_id': winner.id,
+                    'card_name': winner.name
+                });
 
                 setTimeout(resetCurrentRace, 4000); 
             }
